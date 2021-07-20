@@ -1,0 +1,8 @@
+name: WarpGUI
+version: ${project.version}
+main: com.redspeaks.warpgui.WarpGUI
+depend: [Essentials]
+api-version: 1.16
+commands:
+  warpguiload:
+    description: reloads the config and all the items inside the gui

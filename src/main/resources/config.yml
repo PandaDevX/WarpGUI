@@ -1,0 +1,68 @@
+#Aliases for open warp gui menu
+aliases:
+  - 'warp'
+  - 'warps'
+  - 'etc'
+
+#Size of gui inventory
+size: 54
+
+#Title of inventory
+title: 'Warps'
+
+#Fill empty slots
+fill-empty-slots:
+  material: GRAY_STAINED_GLASS_PANE
+  amount: 1
+  displayname: ' '
+
+#Extra items
+Items:
+  back:
+    material: RED_BED
+    slot: 48
+    display_name: '&c← Back'
+    left_click_commands:
+      - '[player] command'
+    right_click_commands:
+      - '[player] command'
+    hide_attributes: true
+    hide_enchantments: true
+    enchantments:
+      efficiency: 1
+  close:
+    material: BARRIER
+    slot: 49
+    display_name: '&cClose'
+    left_click_commands:
+      - '[close]'
+    right_click_commands:
+      - '[close]'
+  warp1:
+    material: DIRT
+    slot: 10
+    display_name: '&bWarp 1'
+    lore:
+      - '&r '
+      - '&7test'
+      - '&7test'
+    left_click_commands:
+      - '[close]'
+      - '[warp] warp1'
+    right_click_commands:
+      - '[close]'
+      - '[warp] warp1'
+  warp2:
+    material: GRASS_BLOCK
+    slot: 11
+    display_name: '&bWarp 2'
+    lore:
+      - '&r '
+      - '&7test2'
+      - '&7test2'
+    left_click_commands:
+      - '[close]'
+      - '[warp] warp2'
+    right_click_commands:
+      - '[close]'
+      - '[warp] warp2'
