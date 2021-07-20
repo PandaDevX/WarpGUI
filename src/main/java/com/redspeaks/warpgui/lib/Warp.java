@@ -4,7 +4,6 @@ import lombok.Getter;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
