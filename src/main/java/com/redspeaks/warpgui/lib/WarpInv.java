@@ -9,6 +9,7 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -50,22 +51,26 @@ public class WarpInv implements InventoryHolder {
 
     public void open(Player player) {
         for(int i = 0; i < inventory.getSize(); i++) {
-            if(inventory.getItem(i) == null) continue;
-            if(!inventory.getItem(i).hasItemMeta()) continue;
             ItemStack stack = inventory.getItem(i);
+            if(stack == null) continue;
             ItemMeta meta = stack.getItemMeta();
+            if(meta == null) continue;
             meta.setDisplayName(WarpGUI.getInstance().parsePlaceHolderIfPresent(meta.getDisplayName(), player));
             if(meta.hasLore()) {
-                for(int j = 0; j < meta.getLore().size(); j++) {
-                    meta.getLore().set(j, WarpGUI.getInstance().parsePlaceHolderIfPresent(meta.getLore().get(j), player));
+                List<String> currentLore = meta.getLore();
+                for(int j = 0; j < currentLore.size(); j++) {
+                    currentLore.set(j, WarpGUI.getInstance().parsePlaceHolderIfPresent(currentLore.get(j), player));
                 }
+                meta.setLore(currentLore);
             }
             stack.setItemMeta(meta);
+            inventory.setItem(i, stack);
         }
         player.openInventory(inventory);
     }
 
     @Override
+    @NotNull
     public Inventory getInventory() {
         return inventory;
     }

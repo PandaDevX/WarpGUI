@@ -19,10 +19,10 @@ public class WarpCommand implements Listener {
     public void onCommand(PlayerCommandPreprocessEvent e) {
         String message = e.getMessage().trim();
         if(!findCommand(message)) return;
-        e.setCancelled(true);
         if(message.split(" ").length == 0) {
             return;
         }
+        e.setCancelled(true);
         Player player = e.getPlayer();
         WarpGUI.getInstance().getWarpInv().open(player);
     }
