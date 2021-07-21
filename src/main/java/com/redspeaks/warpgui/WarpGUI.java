@@ -4,6 +4,7 @@ import com.earth2me.essentials.Essentials;
 import com.redspeaks.warpgui.lib.Warp;
 import com.redspeaks.warpgui.lib.WarpInv;
 import lombok.Getter;
+import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -11,6 +12,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentWrapper;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -71,6 +73,17 @@ public final class WarpGUI extends JavaPlugin {
 
         warpInv = new WarpInv(getConfig().getString("title"), placeHolder, getConfig().getInt("size"));
         warpInv.onLoad(warpCollections);
+    }
+
+    public String parsePlaceHolderIfPresent(String message, Player player) {
+        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            /*
+             * We register the EventListener here, when PlaceholderAPI is installed.
+             * Since all events are in the main class (this class), we simply use "this"
+             */
+            return PlaceholderAPI.setPlaceholders(player, message);
+        }
+        return message;
     }
 
     @Override

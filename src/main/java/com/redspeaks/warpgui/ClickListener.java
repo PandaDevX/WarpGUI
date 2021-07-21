@@ -38,7 +38,7 @@ public class ClickListener implements Listener {
                         for (int i = 1; i < cmd.length; i++) {
                             builder.append(cmd[i]).append(" ");
                         }
-                        ((Player) e.getWhoClicked()).performCommand(builder.toString().trim());
+                        ((Player) e.getWhoClicked()).performCommand(WarpGUI.getInstance().parsePlaceHolderIfPresent(builder.toString().trim(), (Player)e.getWhoClicked()));
                         continue;
                     }
                     if (left.startsWith("[close]")) {
@@ -50,9 +50,10 @@ public class ClickListener implements Listener {
                         String[] cmd = left.split(" ");
                         e.setCancelled(true);
                         e.getWhoClicked().closeInventory();
-                        ((Player) e.getWhoClicked()).performCommand("warp " + cmd[1]);
+                        ((Player) e.getWhoClicked()).performCommand("warp " + WarpGUI.getInstance().parsePlaceHolderIfPresent(cmd[1], (Player)e.getWhoClicked()));
                         continue;
                     }
+                    left = WarpGUI.getInstance().parsePlaceHolderIfPresent(left, (Player)e.getWhoClicked());
                     Bukkit.dispatchCommand(Bukkit.getConsoleSender(), left.replace("{player}", e.getWhoClicked().getName()));
                 }
             }
@@ -65,7 +66,7 @@ public class ClickListener implements Listener {
                         for (int i = 1; i < cmd.length; i++) {
                             builder.append(cmd[i]).append(" ");
                         }
-                        ((Player) e.getWhoClicked()).performCommand(builder.toString().trim());
+                        ((Player) e.getWhoClicked()).performCommand(WarpGUI.getInstance().parsePlaceHolderIfPresent(builder.toString().trim(), (Player)e.getWhoClicked()));
                         continue;
                     }
                     if (right.startsWith("[close]")) {
@@ -77,9 +78,10 @@ public class ClickListener implements Listener {
                         String[] cmd = right.split(" ");
                         e.setCancelled(true);
                         e.getWhoClicked().closeInventory();
-                        ((Player) e.getWhoClicked()).performCommand("warp " + cmd[1]);
+                        ((Player) e.getWhoClicked()).performCommand("warp " + WarpGUI.getInstance().parsePlaceHolderIfPresent(cmd[1], (Player)e.getWhoClicked()));
                         continue;
                     }
+                    right = WarpGUI.getInstance().parsePlaceHolderIfPresent(right, (Player)e.getWhoClicked());
                     Bukkit.dispatchCommand(Bukkit.getConsoleSender(), right.replace("{player}", e.getWhoClicked().getName()));
                 }
             }

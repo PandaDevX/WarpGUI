@@ -1,7 +1,9 @@
 package com.redspeaks.warpgui.lib;
 
+import com.redspeaks.warpgui.WarpGUI;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemFlag;
@@ -44,6 +46,23 @@ public class WarpInv implements InventoryHolder {
             itemStack.setItemMeta(meta);
             inventory.setItem(warp.getSlot(), itemStack);
         }
+    }
+
+    public void open(Player player) {
+        for(int i = 0; i < inventory.getSize(); i++) {
+            if(inventory.getItem(i) == null) continue;
+            if(!inventory.getItem(i).hasItemMeta()) continue;
+            ItemStack stack = inventory.getItem(i);
+            ItemMeta meta = stack.getItemMeta();
+            meta.setDisplayName(WarpGUI.getInstance().parsePlaceHolderIfPresent(meta.getDisplayName(), player));
+            if(meta.hasLore()) {
+                for(int j = 0; j < meta.getLore().size(); j++) {
+                    meta.getLore().set(j, WarpGUI.getInstance().parsePlaceHolderIfPresent(meta.getLore().get(j), player));
+                }
+            }
+            stack.setItemMeta(meta);
+        }
+        player.openInventory(inventory);
     }
 
     @Override

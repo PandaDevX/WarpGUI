@@ -2,6 +2,7 @@ name: WarpGUI
 version: ${project.version}
 main: com.redspeaks.warpgui.WarpGUI
 depend: [Essentials]
+softdepend: [PlaceholderAPI]
 api-version: 1.16
 commands:
   warpguiload:

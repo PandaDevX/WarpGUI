@@ -24,7 +24,7 @@ public class WarpCommand implements Listener {
             return;
         }
         Player player = e.getPlayer();
-        player.openInventory(WarpGUI.getInstance().getWarpInv().getInventory());
+        WarpGUI.getInstance().getWarpInv().open(player);
     }
 
     public boolean findCommand(String message) {
