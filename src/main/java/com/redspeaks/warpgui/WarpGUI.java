@@ -73,6 +73,7 @@ public final class WarpGUI extends JavaPlugin {
 
         warpInv = new WarpInv(getConfig().getString("title"), placeHolder, getConfig().getInt("size"));
         warpInv.onLoad(warpCollections);
+
     }
 
     public String parsePlaceHolderIfPresent(String message, Player player) {

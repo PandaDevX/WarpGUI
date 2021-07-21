@@ -8,7 +8,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -30,7 +29,7 @@ public class ClickListener implements Listener {
             if(previousWarp != null && previousWarp.getWarpName().equals(warp.getWarpName())) return;
             clickedWarpCache.put((Player)e.getWhoClicked(), warp);
             e.setCancelled(true);
-            if (e.getClick() == ClickType.LEFT || e.getClick() == ClickType.SHIFT_LEFT) {
+            if (e.getClick().isLeftClick()) {
                 for (String left : warp.getLeftRawCommands()) {
                     if (left.startsWith("[player]")) {
                         String[] cmd = left.split(" ");
@@ -94,7 +93,7 @@ public class ClickListener implements Listener {
 
     private Warp getWarp(ItemStack clicked, int slot) {
         for(Warp warp : WarpGUI.getInstance().getWarpCollections()) {
-            if(warp.getLogo().isSimilar(clicked) && warp.getSlot() == slot) {
+            if(warp.getLogo().isSimilar(clicked) || warp.getSlot() == slot) {
                 return warp;
             }
         }
