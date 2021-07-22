@@ -23,12 +23,12 @@ public class ClickListener implements Listener {
                 e.setCancelled(true);
                 return;
             }
+            e.setCancelled(true);
             Warp warp = getWarp(e.getCurrentItem(), e.getSlot());
             if (warp == null) return;
             Warp previousWarp = clickedWarpCache.getIfPresent((Player)e.getWhoClicked());
             if(previousWarp != null && previousWarp.getWarpName().equals(warp.getWarpName())) return;
             clickedWarpCache.put((Player)e.getWhoClicked(), warp);
-            e.setCancelled(true);
             if (e.getClick().isLeftClick()) {
                 for (String left : warp.getLeftRawCommands()) {
                     if (left.startsWith("[player]")) {
@@ -93,10 +93,17 @@ public class ClickListener implements Listener {
 
     private Warp getWarp(ItemStack clicked, int slot) {
         for(Warp warp : WarpGUI.getInstance().getWarpCollections()) {
-            if(warp.getLogo().isSimilar(clicked) || warp.getSlot() == slot) {
+            if(isSimilar(warp.getLogo(), clicked) || warp.getSlot() == slot) {
                 return warp;
             }
         }
         return null;
+    }
+
+    private boolean isSimilar(ItemStack stack, ItemStack stack2) {
+        if(stack.getItemMeta().getDisplayName().equals(stack2.getItemMeta().getDisplayName())) {
+            return true;
+        }
+        return stack.getType() == stack2.getType();
     }
 }
